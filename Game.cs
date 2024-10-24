@@ -21,5 +21,17 @@ namespace Lab1
             
             Player_id = _count_id++;
         }
+        
+        public static void GameHistory()
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine("Game History:");
+            foreach (var game in Games)
+            {
+                Console.WriteLine($"Game ID: {game.Player_id}: {game.Winner.UserName} won against {game.Loser.UserName} with a bet of {game.Score}.");
+                Console.WriteLine($"Game ID: {game.Player_id}: {game.Loser.UserName} lost to {game.Winner.UserName} with a bet of {game.Score}.");
+            }
+
+        }
     }
 }

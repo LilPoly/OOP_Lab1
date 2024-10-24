@@ -22,10 +22,11 @@ namespace Lab1
             {
                 throw new InvalidOperationException("Enter a number greter than 1");
             }
-
-            uint newRating = CurrentRating + rating;
-            CurrentRating = newRating < 1 ? 1 : newRating;
             
+            CurrentRating += rating;
+
+            opponentName.CurrentRating = opponentName.CurrentRating > rating ? opponentName.CurrentRating - rating : 1;
+
             GamesCount += 1;
 
             gameList.Add(game);
@@ -37,15 +38,16 @@ namespace Lab1
 
         public void LoseGame(GameAccount opponentName, uint rating)
         {
-            Game game = new Game(this, opponentName, rating);
+            Game game = new Game(opponentName, this, rating);
             
             if (rating < 1)
             {
                 throw new InvalidOperationException("Enter a number greter than 1");
             }
+
+            CurrentRating = CurrentRating > rating ? CurrentRating - rating : 1;
             
-            uint newRating = CurrentRating - rating;
-            CurrentRating = newRating > 1 ? 1 : newRating;
+            opponentName.CurrentRating += rating;
             
             GamesCount += 1;
             
@@ -57,10 +59,10 @@ namespace Lab1
         
         public void GetStats()
         {
-            Console.ForegroundColor = ConsoleColor.DarkGreen;
-            Console.WriteLine($"STATS OF {UserName}");
-            Console.ForegroundColor = ConsoleColor.Green;
-        
+            Console.ForegroundColor = ConsoleColor.DarkBlue;
+            Console.WriteLine($"Stats of {UserName}");
+
+            Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine($"Current rating: {CurrentRating}");
             Console.WriteLine($"Games played: {gameList.Count}");
             Console.WriteLine($"Wins: {gameList.Count(i => i.Winner == this)}");
