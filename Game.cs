@@ -3,7 +3,7 @@ namespace Lab1
     class Game
     {
         private static uint _count_id = 1;
-        internal static List<Game> Games;
+        public static List<Game> Games;
         public GameAccount Winner { get; }
         public GameAccount Loser { get; }
         public uint Score { get; }
