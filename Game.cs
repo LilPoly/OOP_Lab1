@@ -1,6 +1,6 @@
 namespace Lab1
 {
-    class Game
+    public class Game
     {
         private static uint _count_id = 1;
         public static List<Game> Games;

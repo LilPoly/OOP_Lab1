@@ -3,8 +3,8 @@ namespace Lab1
     public class GameAccount
     {
         public string UserName { get; }
-        public uint CurrentRating { get; set; } = 1;
-        public uint GamesCount { get; set; }
+        private uint CurrentRating { get; set; } = 1;
+        private uint GamesCount { get; set; }
 
         private List<Game> gameList;
 
@@ -20,7 +20,7 @@ namespace Lab1
             Game game = new Game(this, opponentName, rating);
             if (rating < 1)
             {
-                throw new InvalidOperationException("Enter a number greter than 1");
+                throw new InvalidOperationException("Enter a number greater than 1");
             }
             
             CurrentRating += rating;
@@ -42,7 +42,7 @@ namespace Lab1
             
             if (rating < 1)
             {
-                throw new InvalidOperationException("Enter a number greter than 1");
+                throw new InvalidOperationException("Enter a number greater than 1");
             }
 
             CurrentRating = CurrentRating > rating ? CurrentRating - rating : 1;
@@ -61,15 +61,21 @@ namespace Lab1
         {
             Console.ForegroundColor = ConsoleColor.DarkBlue;
             Console.WriteLine($"Stats of {UserName}");
-
+            
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine($"Current rating: {CurrentRating}");
-            Console.WriteLine($"Games played: {gameList.Count}");
-            Console.WriteLine($"Wins: {gameList.Count(i => i.Winner == this)}");
-            Console.WriteLine($"Defeats: {gameList.Count(i => i.Loser  == this)}");
-        
+            Console.WriteLine("─────────────────────────────────────");
+            Console.WriteLine($"{"Metric",-15} | {"Value",-10}");
+            Console.WriteLine("─────────────────────────────────────");
+            
+            Console.WriteLine($"{ "Current rating:",-15} | {CurrentRating,-10}");
+            Console.WriteLine($"{ "Games played:",-15} | {gameList.Count,-10}");
+            Console.WriteLine($"{ "Wins:",-15} | {gameList.Count(i => i.Winner == this),-10}");
+            Console.WriteLine($"{ "Defeats:",-15} | {gameList.Count(i => i.Loser == this),-10}");
+    
+            Console.WriteLine("─────────────────────────────────────");
             Console.ResetColor();
         }
+
 
     }
     
